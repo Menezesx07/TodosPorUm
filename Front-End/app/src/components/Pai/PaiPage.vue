@@ -5,15 +5,74 @@
     <div class="body">
         <div class="cont mx-auto">
 
+            <header><!-- início Cabeçalho -->
+                <nav class="navbar"><!-- Menu -->
+                    <div class="container-fluid">
+                        <div class="navbar-brand text-start"><!-- Logotipo "Todos Por Um" -->
+                            <a class="text-decoration-none text-dark" href="index.html">
+                                <h1 class="fw-bold"><span>TODOS</span><br>POR UM</h1>
+                            </a>
+                        </div><!-- /fim Logotipo "Todos Por Um" -->
+                    
+                        <!-- Menu responsivo -->
+
+                        <!-- Botão do menu do usuário -->
+                        <a class="perfil" type="button" data-bs-toggle="offcanvas" data-bs-target="#abaLateral" aria-controls="abaLateral">Meu Perfil</a>
+                        <!-- /fim Botão do menu do usuário -->
+
+                        <!-- Aba lateral do usuário -->
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="abaLateral" aria-labelledby="abaLateralLabel">
+                            <!-- Cabeçalho da aba lateral -->
+                            <div class="offcanvas-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div> <!-- /fim Cabeçalho da aba lateral -->
+
+                            <!-- Corpo da aba lateral -->
+                            <div class="offcanvas-body">
+                                <img src="https://picsum.photos/180" class="d-block mx-auto rounded-circle">
+
+                                <h5 class="fw-bold text-uppercase text-center mt-3">nome</h5>
+
+                                <div class="text-start">
+                                    <button type="button" class="btn mt-3 fw-bold" v-on:click="logout">
+                                        <span class="material-icons">logout</span>
+                                        <sup>Sair</sup>
+                                    </button>
+                                </div>
+                                <hr>
+
+                                <ul class="list-group list-group-flush ms-2 text-start">
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="index.vue">Início</a>
+                                    </li>
+
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="#">Serviços</a>
+                                    </li>
+
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="#">Sobre</a>
+                                    </li>
+                                    
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="#">Contato</a>
+                                    </li>
+                                </ul>
+                            </div> <!-- /fim Corpo da aba lateral -->
+                        </div> <!-- /fim Aba lateral do usuário -->
+                    </div>
+                </nav> <!-- /fim Menu -->
+            </header> <!-- /fim Cabeçalho -->
+    
             <!-- Botão para cadastrar aluno -->
             <button type="button" class="table-btn float-right pt-2 px-2 mt-5 rounded border-0" data-bs-toggle="modal" data-bs-target="#alunoCadastro" title="Cadastrar novo(a) aluno(a)">
                     <span class="material-icons text-light">add</span>
             </button> <!-- /fim do Botão para cadastrar aluno -->
-
+         
             <!-- Modal -->
             <div class="modal fade" id="alunoCadastro" tabindex="-1" aria-labelledby="labelEstatico" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content mx-auto">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable mx-auto">
+                    <div class="modal-content">
                         <!-- Cabeçalho do Modal -->
                         <div class="modal-header">
                             <!-- Título -->
@@ -78,7 +137,6 @@
 
                                             <label for="idFem" type="radio" class="form-check-label">Feminino</label>
                                         </div>
-
                                     </div>
                                 </div>
 
@@ -112,13 +170,13 @@
                                         </p>
                                     
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="def" id="idDefSim" value="opt1" checked>
+                                            <input type="radio" class="form-check-input" name="def" id="idDefSim" value="opt1">
 
                                             <label for="idDefSim" class="form-check-label">Sim</label>
                                         </div>
 
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="def" id="idDefNao" value="opt2">
+                                            <input type="radio" class="form-check-input" name="def" id="idDefNao" value="opt2" checked>
 
                                             <label for="idDefNao" type="radio" class="form-check-label">Não</label>
                                         </div>
@@ -325,33 +383,22 @@ import Axios from "@/services/trylogin"
      methods: {
          async getAlunosBd() {
 
-            Axios.getPai().then(resposta => {
-
-            this.retornoBd = resposta.data
-
-                 });
-            },
+            //chamando os dados do back
+            Axios.getPai().then(resposta => {this.retornoBd = resposta.data});
+        },
 
         async removeAlunoBd(id) {
-
-            
-
-            const data = {
-                id: id
-            }
-
-
+            const data = { id: id }//convertendo de string para json
             Axios.deletePai(data).then(resposta => {this.getAlunosBd()}) //recarregar tabela
+        },
 
-
-
+        async logout() {
+            this.$store.commit("logout")
         }
-
     },
 
          mounted() {
            
-            this.getAlunosBd();
             
     }
 }

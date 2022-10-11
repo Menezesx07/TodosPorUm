@@ -1,5 +1,6 @@
 import router from '@/router';
 import { createStore } from 'vuex'
+import VuexPersistence from 'vuex-persist';
 
 export default createStore({
   state: {
@@ -28,6 +29,9 @@ export default createStore({
       state.acesso = "";
     }
   },
-  modules: {
-  }
+  plugins: [
+    new VuexPersistence({
+      storage: window.sessionStorage
+    }).plugin
+  ]
 })

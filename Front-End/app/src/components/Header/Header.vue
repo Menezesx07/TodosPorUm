@@ -1,5 +1,8 @@
 <template>
 
+<div class="cont">
+
+
 <header><!-- início Cabeçalho -->
                 <nav class="navbar navbar-expand-lg"><!-- Menu -->
                     <div class="container-fluid">
@@ -39,7 +42,7 @@
                     </div><!-- /fim Menu responsivo -->
                 </nav> <!-- /fim Menu -->
             </header> <!-- /fim Cabeçalho -->
-
+        </div>
 </template>
 
 <script>
@@ -113,7 +116,7 @@ export default {
     }
     
     .cont {
-        width: 70vw;
+        width: 1200px;
         padding: 1vw;
     }
     

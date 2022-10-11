@@ -1,67 +1,135 @@
 <template>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-<div class="body">
-
-           
+    <div class="body">
         <div class="cont mx-auto">
-            <header class="mb-4"><!-- início Cabeçalho -->
-                <nav class="navbar navbar-expand-lg"><!-- Menu -->
+            <header><!-- início Cabeçalho -->
+                <nav class="navbar"><!-- Menu -->
                     <div class="container-fluid">
                         <div class="navbar-brand text-start"><!-- Logotipo "Todos Por Um" -->
-                            <a href="index.html">
-                                <h1 class="fw-bold text-dark"><span>TODOS</span><br>POR UM</h1>
+                            <a class="text-decoration-none text-dark" href="index.html">
+                                <h1 class="fw-bold"><span>TODOS</span><br>POR UM</h1>
                             </a>
                         </div><!-- /fim Logotipo "Todos Por Um" -->
                     
                         <!-- Menu responsivo -->
 
-                        <!-- Botão "hambúrguer" do menu responsivo -->
-                        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navegacao" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <!-- /fim Botão "hambúrguer" do menu responsivo -->
+                        <!-- Botão do menu do usuário -->
+                        <a class="perfil" type="button" data-bs-toggle="offcanvas" data-bs-target="#abaLateral" aria-controls="abaLateral">Meu Perfil</a>
+                        <!-- /fim Botão do menu do usuário -->
 
-                        <button>Logout</button>
-                        <div id="navegacao" class="collapse navbar-collapse">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item fw-bold">
-                                    <a href="index.html" class="nav-link">Início</a>
-                                </li>
+                        <!-- Aba lateral do usuário -->
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="abaLateral" aria-labelledby="abaLateralLabel">
+                            <!-- Cabeçalho da aba lateral -->
+                            <div class="offcanvas-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div> <!-- /fim Cabeçalho da aba lateral -->
 
-                                <li class="nav-item fw-bold">
-                                    <a href="#" class="nav-link">Serviços</a>
-                                </li>
+                            <!-- Corpo da aba lateral -->
+                            <div class="offcanvas-body">
+                                <img src="https://picsum.photos/180" class="d-block mx-auto rounded-circle">
 
-                                <li class="nav-item fw-bold">
-                                    <a href="#" class="nav-link">Sobre</a>
-                                </li>
+                                <h5 class="fw-bold text-uppercase text-center mt-3">nome</h5>
 
-                                <li class="nav-item fw-bold">
-                                    <a href="#" class="nav-link">Contato</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- /fim Menu responsivo -->
+                                <div class="text-start">
+                                    <button type="button" class="btn mt-3 fw-bold" v-on:click="logout">
+                                        <span class="material-icons">logout</span>
+                                        <sup>Sair</sup>
+                                    </button>
+                                </div>
+                                <hr>
+
+                                <ul class="list-group list-group-flush ms-2 text-start">
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="index.vue">Início</a>
+                                    </li>
+
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="#">Serviços</a>
+                                    </li>
+
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="#">Sobre</a>
+                                    </li>
+                                    
+                                    <li class="list-group-item fw-bold mb-2">
+                                        <a class="text-decoration-none" href="#">Contato</a>
+                                    </li>
+                                </ul>
+                            </div> <!-- /fim Corpo da aba lateral -->
+                        </div> <!-- /fim Aba lateral do usuário -->
+                    </div>
                 </nav> <!-- /fim Menu -->
-            </header> <!-- /fim Cabeçalho -->    
+            </header> <!-- /fim Cabeçalho -->
+
+            
+            <main role="main">
+                
+
+            <div v-if="!ok">
+               <div class="d-grid gap-2 col-6 mx-auto" v-for="retornoBd in retornoBd" :key="retornoBd.id">
+                    <button type="button" class="btn text-light fw-bold fs-4" v-on:click="getTokenAluno(retornoBd.tokenaluno)">
+                        {{retornoBd.sala}}
+                    </button>
+                </div>
+            </div>
+
+            <div v-else>
+                <Alunos :tokenAlunoProps = "tokenAluno" /> <!-- enviando via props -->
+            </div>
+
+               
+            </main>
         </div>
-      <!-- <Salas/>-->
-       <Alunos/>
-</div>
-
-
-      
+    </div>
 </template>
 
 <script>
 import Salas from './salas/Salas.vue';
 import Alunos from './alunos/Alunos.vue';
+import Axios from '@/services/trylogin';
+
+
 
     export default {
     name: "ProfView",
-    components: { Salas, Alunos }
+    data() {
+        return {
+          ok: false,  
+          token: {  //token que vai para o servidor
+            tokenprof: this.$store.state.token
+        }, 
+          retornoBd: null,
+          tokenAluno: null //token responsavel por buscar os alunos que vai ser enviado via props no html - parte2
+        }
+    },
+    components: { Salas, Alunos},
+        methods: {
+            async logout() {
+            this.$store.commit("logout")
+        },
+
+        getSalas() { //chamando o banco com o token do professor como parametro
+            console.log(this.token)
+            Axios.getSala(this.token).then(resposta => { //exibindo as salas do bd
+                 this.retornoBd = resposta.data
+            })
+
+        },
+
+        getTokenAluno(tokenaluno) { //pegando o token ao clicar no botão
+            this.ok = true;
+            this.tokenAluno = tokenaluno //enviando via props parte 1
+        }
+
+        },
+        mounted() {
+           
+            this.getSalas();
+
+        }
+
     }
 
 </script>
@@ -139,251 +207,248 @@ import Alunos from './alunos/Alunos.vue';
     .navbar-brand a {
         text-decoration: none;
     }
+
+    .navbar-brand span {
+        color: #00a7aa;
+    }
     
     
+    /* Botão de configurações */
+
+    .container-fluid .perfil {
+        color: #00a7aa;
+        transition: .3s;
+        text-decoration: none;
+    }
+
+    .container-fluid .perfil:hover {
+        color: #019092;
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+    }
+
+
     /* Menu de navegação */
     
-    .nav-item {
-        margin-left: 3.5vw;
-        cursor: pointer;
+    .list-group-item {
+        border-bottom: 0;
+    }
+
+    .list-group-item a {
+        transition: .3s;
+    }
+
+    .list-group-item a:hover {
+        color: #00a7aa;
+    }
+
+
+    /* Botão de sair */
+
+    .offcanvas-body button span {
+        font-size: 1.5vw;
+    }
+
+    .offcanvas-body button sup {
         font-size: .9vw;
+        margin-left: .8vw;
     }
-    
-    .nav-link {
-        color: black;
-        transition: .3s;
+
+    .offcanvas-body button {
+        border-radius: 30px;
+        padding-bottom: 0;
     }
-    
-    .nav-link:hover, .ativo {
-        color: #00a7aa;
-    }
-    
-    .ativo {
-        cursor: auto;
-    }
-    
-    /* Formatação da tela de login */
-    
-    main {
-        justify-content: space-between;
-        margin-top: 2vw;
-    }
-    
-    /* Textos e inputs */
-    
-    aside {
-        width: 30vw;
-        padding: 2vw;
-        border-radius: 10px;
-    }
-    
-    aside h2 {
-        font-size: 3.2vw;
-        line-height: 3.3vw;
-        font-family: 'poppinsmedium';
-    }
-    
-    aside span, .navbar-brand span {
-        color: #00a7aa;
-    }
-    
-   
-    
-    /* Imagem animada */
-    
-    article img {
-        width: 28vw;
-    }
-    
-    
-    /* Modal */
-    
-    .modal-content {
-        box-shadow: 1px 1px 12px 6px rgba(0, 0, 0, 0.274);
-    }
-    
-    .modal-content {
-        text-align: start;
-    }
-    
-    
-    /* Tabela dos pais */
-    
-    .table-btn {
-        margin-left: 60vw;
-        cursor: pointer;
+
+    .offcanvas-body button:hover {
         background-color: #00a7aa;
-        transition: .3s;
-    }
-    
-    .table-btn:hover {
-        background-color: #019092;
-    }
-    
-    .bg-table-thead {
-        background-color: #00a7aa;
-    }
-    
-    .modal-footer button {
-        width: 17vw;
-        font-size: 1vw;
+        color: white;
     }
 
 
     /* Tela do(a) professor(a) */
-    
-    .main-prof {
-        margin-top: 8vw;
+
+    main {
+        margin-top: 6vw;
     }
 
-    .main-prof button {
+    .sala {
+        font-size: 2vw;
+    }
+
+    .accordion {
+        width: 50%;
+        height: 45.3vh;
+    }
+
+    .d-grid button {
         background-color: #00a7aa;
+        margin-bottom: 1.3vw;
     }
 
-    .main-prof button:hover {
+    .d-grid button:hover {
         background-color: #009092;
     }
 
-    .main-prof .accordion-button {
+    .accordion-header button {
+        font-size: 1.3vw;
+    }
+
+    main .accordion-button {
         background-color: white;
         border: 1px solid #00a7aa;
         color: #00a7aa;
         transition: .3s;
     }
 
-    .main-prof .accordion-button:hover {
+    .accordion-button:hover {
         background-color: #00babd4d;
         color: white;
         border-color: #00babd4d;
     }
 
+
+    /* Corpo do accordion */
+
+    .accordion-body {
+        font-size: .9vw;
+        width: 75%;
+    }
+
+    .accordion-body p {
+        border-bottom: 1px solid #00a7aa;
+    }
+
     
     /* ESTILIZAÇÃO DO MENÚ RESPONSIVO */
     
-    @media (max-width: 991.98px) {
+    @media (max-width: 767.98px) {
     
+        .cont {
+            width: 95vw;
+        }
+
         /* Título "Todos Por Um" */
     
         .navbar-brand h1 {
             font-size: 5vw;
             line-height: 4.2vw;
         }
-    
-        /* Botão "hambúrguer" do menu responsivo */
-    
-        .navbar-toggler {
-            background-color: #00a7aa;
-        }
-    
-        /* Opções do menú: "Início", "Serviços", etc... */
-    
-        nav ul {
-            width: 35%;
-            margin: 5vw auto 0px auto;
-        }
-    
-        .nav-item {
-            margin-bottom: 5vw;
-        }
-    
-        .nav-link {
+
+        
+        /* Botão de "Meu Perfil" */
+
+        .container-fluid .perfil {
             font-size: 5vw;
         }
-    
-        aside {
+
+
+        /* Botão de sair */
+
+        .offcanvas-body button span {
+            font-size: 7vw;
+        }
+
+        .offcanvas-body button sup {
+            font-size: 4vw;
+            margin-left: 3vw;
+        }
+
+
+        /* Título da sala */
+
+        .sala {
+            font-size: 6vw;
+        }
+
+
+        /* Accordion */
+
+        .accordion {
+            width: 90%;
+            height: 49.8vh;
+        }
+
+        .accordion-header button {
+            font-size: 5vw;
+        }
+
+        .accordion img {
+            width: 10vw;
+        }
+
+        .accordion-body {
+            font-size: 3.2vw;
             width: 100%;
         }
-    
-        aside h2 {
-            font-size: 8vw;
-            text-align: center;
-            line-height: 9vw;
-        }
-    
-        /*
-        aside p {
-            line-height: 3.8vw;
-            font-size: 2.5vw;
-        }
-        */
-    
-        .login-inputs {
-            font-size: 4vw;
-            margin-top: 2vw;
-        }
-    
-        aside input[type="email"], aside input[type="password"] {
-            padding: 3vw;
-            margin-top: 4vw;
-        }
-    
-        /* Botões */
-    
-        .login-btn {
-            flex-direction: column;
-        }
-    
-        /* Botão de "ENTRAR" */
-    
-        .login-btn input {
-            padding: 1.5vw 1vw;
-            font-size: 5vw;
-            margin-top: 4vw;
-        }
-    
-        /* Link para Cadastrar */
-    
-        .login-btn a {
-            margin: 6vw auto 0 auto;
-            font-size: 4vw;
-        }
-    
-        /* Imagem animada não aparece */
-    
-        img {
-            display: none;
-        }
-    
-    
-        /* Modal de cadastro dos pais */
-    
-        .modal-content {
-            width: 90vw;
-            box-shadow: none;
-        }
-    
-        .modal-body p {
+
+    }
+
+    @media (min-width: 768px) and (max-width: 1199.98px) {
+         
+        /* Botão de "Meu Perfil" */
+
+        .container-fluid .perfil {
             font-size: 3vw;
         }
-    
-        .def-fisica, .def-intel {
+
+        /* Título da sala */
+
+        .sala {
+            font-size: 4vw;
+        }
+        
+        /* Accordion */
+
+        .accordion {
+            width: 90%;
+            height: 44.4vh;
+        }
+
+        .accordion-header button {
+            font-size: 2.5vw;
+        }
+
+        .accordion-body {
+            font-size: 2vw;
+            width: 85%;
+        }
+
+        /* Botão de sair */
+
+        .offcanvas-body button span {
             font-size: 3.5vw;
         }
-    
-        .modal-footer button {
-            font-size: 3.5vw;
-            width: 65vw;
+
+        .offcanvas-body button sup {
+            font-size: 2.2vw;
+            margin-left: 3vw;
         }
-    
-        .tamanho-input-modal {
-            width: 100%;
-        }
-    
-        .coluna {
-            flex-direction: column;
-        }
-    
-        /* Modal do cadastro do aluno */
-    
-        .modal-content {
-            width: 85vw;
-        }
-    
-        .table-btn {
-            display: block;
-            font-size: 3.2vw;
-            margin: auto;
+
+        .list-group {
+            font-size: 2.5vw;
         }
     }
 
+    @media (min-width: 1200px) and (max-width: 1399.98px) {
+        /* Botão de "Meu Perfil" */
+
+        .container-fluid .perfil {
+            font-size: 1.6vw;
+        }
+
+        /* Botão de sair */
+
+        .offcanvas-body button span {
+            font-size: 2vw;
+        }
+
+        .offcanvas-body button sup {
+            font-size: 1.2vw;
+            margin-left: 1.5vw;
+        }
+
+        .list-group {
+            font-size: 1.8vw;
+        }
+    }
 </style>

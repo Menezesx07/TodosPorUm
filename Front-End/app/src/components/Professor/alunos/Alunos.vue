@@ -1,188 +1,55 @@
 <template>
 
-<p class="float-end fs-6">Prof. Nome</p>
-
+<p class="float-end fs-6">Prof. Fulano</p>
+<p class="sala fw-bold text-uppercase" id="sala">1º ano - A - Manhã</p>
             <main role="main" class="main-prof">
-
-                <p class="fs-1 fw-bold text-uppercase" id="sala">1º ano - A</p>
-
-                <div id="acordeao" class="accordion overflow-auto w-50 mx-auto border border-2 rounded" style="height: 22.6vw;">
-                    <div class="accordion-item" id="accordion-1">
-                        <h2 class="accordion-header" id="accordion-header-1">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-1" aria-expanded="false" aria-controls="accordion-collapse-1">
-                                <p class="col">FULANO</p>
+                <div id="acordeao" class="accordion overflow-auto mx-auto border border-2 rounded" >
+                    <div class="accordion-item" id="accordion-1" v-for="alunos in alunos" :key="alunos.id">
+                      
+                        <h2 class="accordion-header" id="accordion-header-1" >
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-1" aria-expanded="false" aria-controls="accordion-collapse-1" >
+                                <p class="col">{{alunos.nome}}</p>
                                     
-                                <span class="material-icons fs-1 me-3">all_inclusive</span>
+                                <img class="me-3 fs-6" src="@/assets/imgs/fita.png" alt="Aluno(a) deficiente" title="Este aluno(a) possui deficiência.">
 
-                                <img src="https://picsum.photos/45" class="border  border-info rounded-circle me-2">
+                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
                             </button>
                         </h2>
 
                         <div id="accordion-collapse-1" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-1">
-                            <div class="accordion-body">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
+                            <div class="accordion-body mx-auto">
+                                <div class="d-flex">
+                                    <div class="col text-start fw-bold">
+                                        <p>Nome:</p>
+                                        <p>Turma:</p>
+                                        <p>Turno</p>
+                                        <p>Data de Nascimento:</p>
+                                        <p>Sexo:</p>
+                                        <p>Tipo Sanguíneo:</p>
+                                        <p>Deficiência:</p>
+                                        <p>Nome do Responsavel:</p>
+                                        <p>E-mail:</p>
+                                        <p>Número:</p>
+                                        <p>Endereço:</p>
+                                    </div>
 
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
+                                    <div class="col text-end">
+                                        <p>{{alunos.nome}}</p>
+                                        <p>{{alunos.turma}}</p>
+                                        <p>{{alunos.turno}}</p>
+                                        <p>{{alunos.nasc}}</p>
+                                        <p>{{alunos.sexo}}</p>
+                                        <p>{{alunos.sangue}}</p>
+                                        <p>{{alunos.deficiencia}}</p>
+                                        <p>{{alunos.nomeresp}}</p>
+                                        <p>{{alunos.email}}</p>
+                                        <p>{{alunos.numero}}</p>
+                                        <p>{{alunos.endereco}}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="accordion-item" id="accordion-1">
-                        <h2 class="accordion-header" id="accordion-header-2">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-2" aria-expanded="false" aria-controls="accordion-collapse-2">
-                                <p class="col">CICLANO</p>
-                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
-                            </button>
-                        </h2>
-
-                        <div id="accordion-collapse-2" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-2">
-                            <div class="accordion-body">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item" id="accordion-3">
-                        <h2 class="accordion-header" id="accordion-header-3">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-3" aria-expanded="false" aria-controls="accordion-collapse-3">
-                                <p class="col">BEUTRANO</p>
-                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
-                            </button>
-                        </h2>
-
-                        <div id="accordion-collapse-3" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-3">
-                            <div class="accordion-body">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item" id="accordion-4">
-                        <h2 class="accordion-header" id="accordion-header-4">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-4" aria-expanded="false" aria-controls="accordion-collapse-4">
-                                <p class="col">REBOCO DE PAREDE</p>
-
-                                <span class="material-icons fs-1 me-3">all_inclusive</span>
-
-                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
-                            </button>
-                        </h2>
-
-                        <div id="accordion-collapse-4" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-4">
-                            <div class="accordion-body">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item" id="accordion-5">
-                        <h2 class="accordion-header" id="accordion-header-5">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-5" aria-expanded="false" aria-controls="accordion-collapse-5">
-                                <p class="col">DEBILOIDE</p>
-                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
-                            </button>
-                        </h2>
-
-                        <div id="accordion-collapse-5" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-5">
-                            <div class="accordion-body">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item" id="accordion-6">
-                        <h2 class="accordion-header" id="accordion-header-6">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-6" aria-expanded="false" aria-controls="accordion-collapse-6">
-                                <p class="col">PEDRINHO BIGODE</p>
-
-                                <span class="material-icons fs-1 me-3">all_inclusive</span>
-
-                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
-                            </button>
-                        </h2>
-
-                        <div id="accordion-collapse-6" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-6">
-                            <div class="accordion-body">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item" id="accordion-8">
-                        <h2 class="accordion-header" id="accordion-header-8">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-8" aria-expanded="false" aria-controls="accordion-collapse-8">
-                                <p class="col">CARA DE PERCATA</p>
-                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
-                            </button>
-                        </h2>
-
-                        <div id="accordion-collapse-8" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-8">
-                            <div class="accordion-body">
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-
-                                    <p>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                    </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item" id="accordion-9">
-                        <h2 class="accordion-header" id="accordion-header-9">
-                            <button class="accordion-button collapsed fw-bold fs-4 d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-9" aria-expanded="false" aria-controls="accordion-collapse-9">
-                                <p class="col">JOÃO CACHAÇA</p>
-                                <img src="https://picsum.photos/45" class="border border-info rounded-circle me-2">
-                            </button>
-                        </h2>
-
-                        <div id="accordion-collapse-9" class="accordion-collapse collapse" data-bs-parent="#acordeao" aria-labelledby="accordion-header-9">
-                            <div class="accordion-body">
-                                <p>
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                </p>
-
-                                <p>
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nihil nemo neque tempore. Numquam nulla culpa voluptates perspiciatis ratione doloribus dolorum in fuga, illum, laudantium labore quos natus aut! Magnam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita hic magni quisquam et pariatur culpa ratione neque, quae dicta illo vitae beatae eos a fugit praesentium minus inventore sapiente est. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cupiditate natus quidem sint rerum eligendi doloremque necessitatibus sunt excepturi. A, repellendus eligendi? Quae at quos alias repellendus illum omnis ut.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                      </div>
                 </div>
             </main>
 
@@ -190,17 +57,38 @@
 
 <script>
 
+import Axios from '@/services/trylogin';
+
     export default {
-        name: "Alunos"
+        name: "Alunos",
+        props: {
+        tokenAlunoProps: String //recebendo via props o token do aluno do profpage
+    }, 
+    data() {
+        return {
+            alunos: null, //armazenando os dados de retorno do back-end
+            tokenAluno: {token1: this.tokenAlunoProps} //convertendo para json
+        }
+    },
+    
+    methods: {
+        getAlunosBack(){ //chamando os alunos do banco com o token da sala (dois digitos)
+           Axios.getAlunos(this.tokenAluno).then(resposta => this.alunos = resposta.data)
+        }
+    },
+
+    mounted() {
+
+        this.getAlunosBack();
+
+        }
     }
 
 </script>
 
 <style scoped>
 
-    /*! Generated by Font Squirrel (https://www.fontsquirrel.com) on May 19, 2021 */
-    
-    /* FONTES QUE ESTÃO SENDO E PODEM SER UTILIZADAS */
+
 
     @font-face {
         font-family: 'poppinsblack';
@@ -273,224 +161,248 @@
     .navbar-brand a {
         text-decoration: none;
     }
+
+    .navbar-brand span {
+        color: #00a7aa;
+    }
     
     
+    /* Botão de configurações */
+
+    .container-fluid .perfil {
+        color: #00a7aa;
+        transition: .3s;
+        text-decoration: none;
+    }
+
+    .container-fluid .perfil:hover {
+        color: #019092;
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+    }
+
+
     /* Menu de navegação */
     
-    .nav-item {
-        margin-left: 3.5vw;
-        cursor: pointer;
-        font-size: .9vw;
+    .list-group-item {
+        border-bottom: 0;
     }
-    
-    .nav-link {
-        color: black;
+
+    .list-group-item a {
         transition: .3s;
     }
-    
-    .nav-link:hover, .ativo {
+
+    .list-group-item a:hover {
         color: #00a7aa;
     }
-    
-    .ativo {
-        cursor: auto;
+
+
+    /* Botão de sair */
+
+    .offcanvas-body button span {
+        font-size: 1.5vw;
     }
-    
-    /* Formatação da tela de login */
-    
-    main {
-        justify-content: space-between;
-        margin-top: 2vw;
+
+    .offcanvas-body button sup {
+        font-size: .9vw;
+        margin-left: .8vw;
     }
-    
-    /* Textos e inputs */
-    
-    aside {
-        width: 30vw;
-        padding: 2vw;
-        border-radius: 10px;
+
+    .offcanvas-body button {
+        border-radius: 30px;
+        padding-bottom: 0;
     }
-    
-    aside h2 {
-        font-size: 3.2vw;
-        line-height: 3.3vw;
-        font-family: 'poppinsmedium';
+
+    .offcanvas-body button:hover {
+        background-color: #00a7aa;
+        color: white;
     }
-    
-    aside span, .navbar-brand span {
-        color: #00a7aa;
-    }
-    
- 
-    /* Modal */
-    
-    .modal-content {
-        box-shadow: 1px 1px 12px 6px rgba(0, 0, 0, 0.274);
-    }
-    
-    .modal-content {
-        text-align: start;
-    }
-    
 
 
     /* Tela do(a) professor(a) */
-    
-    .main-prof {
-        margin-top: 8vw;
+
+    main {
+        margin-top: 6vw;
     }
 
-    .main-prof button {
+    .sala {
+        font-size: 2vw;
+    }
+
+    .accordion {
+        width: 50%;
+        height: 45.3vh;
+    }
+
+    .d-grid button {
         background-color: #00a7aa;
+        margin-bottom: 1.3vw;
     }
 
-    .main-prof button:hover {
+    .d-grid button:hover {
         background-color: #009092;
     }
 
-    .main-prof .accordion-button {
+    .accordion-header button {
+        font-size: 1.3vw;
+    }
+
+    main .accordion-button {
         background-color: white;
         border: 1px solid #00a7aa;
         color: #00a7aa;
         transition: .3s;
     }
 
-    .main-prof .accordion-button:hover {
+    .accordion-button:hover {
         background-color: #00babd4d;
         color: white;
         border-color: #00babd4d;
     }
 
-    #sala {
 
-        margin-left: 650px;
+    /* Corpo do accordion */
+
+    .accordion-body {
+        font-size: .9vw;
+        width: 75%;
     }
+
+    .accordion-body p {
+        border-bottom: 1px solid #00a7aa;
+    }
+
     
     /* ESTILIZAÇÃO DO MENÚ RESPONSIVO */
     
-    @media (max-width: 991.98px) {
+    @media (max-width: 767.98px) {
     
+        .cont {
+            width: 95vw;
+        }
+
         /* Título "Todos Por Um" */
     
         .navbar-brand h1 {
             font-size: 5vw;
             line-height: 4.2vw;
         }
-    
-        /* Botão "hambúrguer" do menu responsivo */
-    
-        .navbar-toggler {
-            background-color: #00a7aa;
-        }
-    
-        /* Opções do menú: "Início", "Serviços", etc... */
-    
-        nav ul {
-            width: 35%;
-            margin: 5vw auto 0px auto;
-        }
-    
-        .nav-item {
-            margin-bottom: 5vw;
-        }
-    
-        .nav-link {
+
+        
+        /* Botão de "Meu Perfil" */
+
+        .container-fluid .perfil {
             font-size: 5vw;
         }
-    
-        aside {
+
+
+        /* Botão de sair */
+
+        .offcanvas-body button span {
+            font-size: 7vw;
+        }
+
+        .offcanvas-body button sup {
+            font-size: 4vw;
+            margin-left: 3vw;
+        }
+
+
+        /* Título da sala */
+
+        .sala {
+            font-size: 6vw;
+        }
+
+
+        /* Accordion */
+
+        .accordion {
+            width: 90%;
+            height: 49.8vh;
+        }
+
+        .accordion-header button {
+            font-size: 5vw;
+        }
+
+        .accordion img {
+            width: 10vw;
+        }
+
+        .accordion-body {
+            font-size: 3.2vw;
             width: 100%;
         }
-    
-        aside h2 {
-            font-size: 8vw;
-            text-align: center;
-            line-height: 9vw;
-        }
-    
-        /*
-        aside p {
-            line-height: 3.8vw;
-            font-size: 2.5vw;
-        }
-        */
-    
-        .login-inputs {
-            font-size: 4vw;
-            margin-top: 2vw;
-        }
-    
-        aside input[type="email"], aside input[type="password"] {
-            padding: 3vw;
-            margin-top: 4vw;
-        }
-    
-        /* Botões */
-    
-        .login-btn {
-            flex-direction: column;
-        }
-    
-        /* Botão de "ENTRAR" */
-    
-        .login-btn input {
-            padding: 1.5vw 1vw;
-            font-size: 5vw;
-            margin-top: 4vw;
-        }
-    
-        /* Link para Cadastrar */
-    
-        .login-btn a {
-            margin: 6vw auto 0 auto;
-            font-size: 4vw;
-        }
-    
-        /* Imagem animada não aparece */
-    
-        img {
-            display: none;
-        }
-    
-    
-        /* Modal de cadastro dos pais */
-    
-        .modal-content {
-            width: 90vw;
-            box-shadow: none;
-        }
-    
-        .modal-body p {
+
+    }
+
+    @media (min-width: 768px) and (max-width: 1199.98px) {
+         
+        /* Botão de "Meu Perfil" */
+
+        .container-fluid .perfil {
             font-size: 3vw;
         }
-    
-        .def-fisica, .def-intel {
+
+        /* Título da sala */
+
+        .sala {
+            font-size: 4vw;
+        }
+        
+        /* Accordion */
+
+        .accordion {
+            width: 90%;
+            height: 44.4vh;
+        }
+
+        .accordion-header button {
+            font-size: 2.5vw;
+        }
+
+        .accordion-body {
+            font-size: 2vw;
+            width: 85%;
+        }
+
+        /* Botão de sair */
+
+        .offcanvas-body button span {
             font-size: 3.5vw;
         }
-    
-        .modal-footer button {
-            font-size: 3.5vw;
-            width: 65vw;
+
+        .offcanvas-body button sup {
+            font-size: 2.2vw;
+            margin-left: 3vw;
         }
-    
-        .tamanho-input-modal {
-            width: 100%;
+
+        .list-group {
+            font-size: 2.5vw;
         }
-    
-        .coluna {
-            flex-direction: column;
+    }
+
+    @media (min-width: 1200px) and (max-width: 1399.98px) {
+        /* Botão de "Meu Perfil" */
+
+        .container-fluid .perfil {
+            font-size: 1.6vw;
         }
-    
-        /* Modal do cadastro do aluno */
-    
-        .modal-content {
-            width: 85vw;
+
+        /* Botão de sair */
+
+        .offcanvas-body button span {
+            font-size: 2vw;
         }
-    
-        .table-btn {
-            display: block;
-            font-size: 3.2vw;
-            margin: auto;
+
+        .offcanvas-body button sup {
+            font-size: 1.2vw;
+            margin-left: 1.5vw;
+        }
+
+        .list-group {
+            font-size: 1.8vw;
         }
     }
 </style>
