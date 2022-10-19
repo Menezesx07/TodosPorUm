@@ -1,7 +1,7 @@
 <template>
 
-<p class="float-end fs-6">Prof. Fulano</p>
-<p class="sala fw-bold text-uppercase" id="sala">1º ano - A - Manhã</p>
+<p class="float-end fs-6">Prof. {{$store.state.nome}}</p>
+<p class="sala fw-bold text-uppercase" id="sala">{{this.SalaTokenalunoPros.s}}</p>
             <main role="main" class="main-prof">
                 <div id="acordeao" class="accordion overflow-auto mx-auto border border-2 rounded" >
                     <div class="accordion-item" id="accordion-1" v-for="alunos in alunos" :key="alunos.id">
@@ -57,29 +57,32 @@
 
 <script>
 
-import Axios from '@/services/trylogin';
+import Axios from "@/services/restApi/restServices"
 
     export default {
         name: "Alunos",
         props: {
-        tokenAlunoProps: String //recebendo via props o token do aluno do profpage
+        tokenAlunoProps: String, //recebendo via props o token do aluno do profpage
+        SalaTokenalunoPros: Object
     }, 
     data() {
         return {
             alunos: null, //armazenando os dados de retorno do back-end
-            tokenAluno: {token1: this.tokenAlunoProps} //convertendo para json
+            tokenAluno: {token1: this.SalaTokenalunoPros.t} //convertendo para json
         }
     },
     
     methods: {
         getAlunosBack(){ //chamando os alunos do banco com o token da sala (dois digitos)
            Axios.getAlunos(this.tokenAluno).then(resposta => this.alunos = resposta.data)
+           console.log(this.tokenAluno)
         }
     },
 
     mounted() {
 
         this.getAlunosBack();
+        console.log(this.tokenAluno)
 
         }
     }

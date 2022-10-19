@@ -8,22 +8,18 @@ export default {
     },
 
     //Pai ---------------------------------------------------------------------------------
-    getPai:() => { //excluir
-        return http.get('alunos')
-    },
-
-    deletePai:(alunos) => {
-        return http.delete('alunos', {data: alunos})
+    getPai:(token) => { //retorna os filhos do pai do bd, com o token de 5 digitos do mesmo
+        return http.post('alunos1/pai', token)
     },
 
     //Professor---------------------------------------------------------------------------
 
-    getSala:(sala) => {
+    getSala:(sala) => { //retorna as salas do professor, com o token de 5 digitos do mesmo
         return http.post('sala', sala)
     },
 
     getAlunos:(token1) => {
-        return http.post('alunos1', token1)
+        return http.post('alunos1/prof', token1) //token1, é o token de 2 digitos referente a sala
     }
 
   

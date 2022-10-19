@@ -11,8 +11,9 @@ public class Bdlogin {
 
 
     private String email;
-
     private String senha;
+
+    private String nome;
     private String acesso;
     private String token;
 
@@ -39,6 +40,10 @@ public class Bdlogin {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getNome() { return nome; }
+
+    public void setNome(String nome) { this.nome = nome; }
 
     public String getAcesso() {
         return acesso;

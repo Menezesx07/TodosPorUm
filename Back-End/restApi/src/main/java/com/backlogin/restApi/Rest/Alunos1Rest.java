@@ -19,6 +19,17 @@ public class Alunos1Rest {
     public List<Alunos1> listar() {return repositorioAlunos1.findAll();}
 
     @PostMapping
+    @RequestMapping("/pai")
+    public ResponseEntity<List<Alunos1>> findbyToken(@RequestBody Alunos1 alunos1) {
+       String token = alunos1.getToken();
+
+       List<Alunos1> result = repositorioAlunos1.findByToken(token);
+
+       return ResponseEntity.ok(result);
+    }
+
+    @PostMapping
+    @RequestMapping("/prof")
     public ResponseEntity<List<Alunos1>> findbyToken1(@RequestBody Alunos1 alunos1) {
        String token1 = alunos1.getToken1();
 

@@ -27,10 +27,10 @@
                             </div> <!-- /fim Cabeçalho da aba lateral -->
 
                             <!-- Corpo da aba lateral -->
-                            <div class="offcanvas-body">
+                            <div class="offcanvas-body" >
                                 <img src="https://picsum.photos/180" class="d-block mx-auto rounded-circle">
 
-                                <h5 class="fw-bold text-uppercase text-center mt-3">nome</h5>
+                                <h5 class="fw-bold text-uppercase text-center mt-3">{{$store.state.nome}}</h5>
 
                                 <div class="text-start">
                                     <button type="button" class="btn mt-3 fw-bold" v-on:click="logout">
@@ -69,14 +69,14 @@
 
             <div v-if="!ok">
                <div class="d-grid gap-2 col-6 mx-auto" v-for="retornoBd in retornoBd" :key="retornoBd.id">
-                    <button type="button" class="btn text-light fw-bold fs-4" v-on:click="getTokenAluno(retornoBd.tokenaluno)">
+                    <button type="button" class="btn text-light fw-bold fs-4" v-on:click="getTokenAluno(retornoBd.tokenaluno, retornoBd.sala)">
                         {{retornoBd.sala}}
                     </button>
                 </div>
             </div>
 
             <div v-else>
-                <Alunos :tokenAlunoProps = "tokenAluno" /> <!-- enviando via props -->
+               <Alunos :SalaTokenalunoPros = "SalaTokenaluno" />  <!-- enviando via props -->
             </div>
 
                
@@ -88,7 +88,7 @@
 <script>
 import Salas from './salas/Salas.vue';
 import Alunos from './alunos/Alunos.vue';
-import Axios from '@/services/trylogin';
+import Axios from "@/services/restApi/restServices"
 
 
 
@@ -101,7 +101,10 @@ import Axios from '@/services/trylogin';
             tokenprof: this.$store.state.token
         }, 
           retornoBd: null,
-          tokenAluno: null //token responsavel por buscar os alunos que vai ser enviado via props no html - parte2
+          SalaTokenaluno: { //objeto que vai enviar via props o token do aluno e nome da sala - parte2
+            t: "", //token que vai ser usado para buscar os alunos no banco
+            s:"" //string que vai definir o nome da sala no topo da lista de alunos
+          },
         }
     },
     components: { Salas, Alunos},
@@ -118,9 +121,14 @@ import Axios from '@/services/trylogin';
 
         },
 
-        getTokenAluno(tokenaluno) { //pegando o token ao clicar no botão
+        getTokenAluno(tokenaluno, sala) { //pegando o token ao clicar no botão
             this.ok = true;
-            this.tokenAluno = tokenaluno //enviando via props parte 1
+
+            //enviando o token via props para buscar os alunos no banco - parte1
+            this.SalaTokenaluno.t = tokenaluno;
+            //enviando nome da sala via props
+            this.SalaTokenaluno.s = sala
+        
         }
 
         },

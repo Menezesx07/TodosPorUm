@@ -14,7 +14,6 @@
                         </div><!-- /fim Logotipo "Todos Por Um" -->
                     
                         <!-- Menu responsivo -->
-
                         <!-- Botão "hambúrguer" do menu responsivo -->
                         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navegacao" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -82,8 +81,9 @@
 <script>
 
 import router from '@/router';
-import Axios from '@/services/trylogin';
+import Axios from "@/services/restApi/restServices";
 import Cadastro from './cadastro-modal/Cadastro.vue';
+import Functions from "@/services/functions"
 
 export default {
     name: "LoginPage",
@@ -96,15 +96,19 @@ export default {
             dadosBack: null,
             encaminhamento: {
                 token: "",
-                acesso: ""
+                acesso: "",
+                nome: ""
             }
         };
     },
     methods: {
         async tryLogin(e) {
             e.preventDefault();
+            
+            
+           Functions.tryLogin1(this.userLogin); 
             //metodo Post com os dados do userLogin
-            Axios.save(this.userLogin).then(resposta => {
+           /* Axios.save(this.userLogin).then(resposta => {
                 this.dadosBack = resposta.data; //recebendo os valores que o post gerou
                 for (let elemento of this.dadosBack) {
                     this.encaminhamento.acesso = elemento.acesso;
@@ -112,25 +116,31 @@ export default {
                 for (let elemento of this.dadosBack) {
                     this.encaminhamento.token = elemento.token;
                 }
-                //jogando o token pro store
+                for (let elemento of this.dadosBack) {
+                    this.encaminhamento.nome = elemento.nome
+                }
+
+                //jogando os dados para o store
                 this.$store.commit("saveToken", this.encaminhamento.token);
                 this.$store.commit("saveAcesso", this.encaminhamento.acesso);
+                this.$store.commit("saveNome", this.encaminhamento.nome);
                 this.redirecionamento();
-            });
+            });*/
         },
         async redirecionamento() {
             //router.push para redirecionar
             switch (this.$store.state.acesso) {
 
                 case "A": router.push("/pai"); 
-                break;
+                 break;
                     case "P": router.push("/prof");
                      break;
-                         case "": alert("Usuario ou Senha Incorreta")
-                         break;
+                        case "": alert("Usuario ou Senha Incorreta")
+                          break;
                 default: 
             }
         }
+
     },
     mounted() {
         //RESOLVER ERRO AO CARREGAR A PAGINA

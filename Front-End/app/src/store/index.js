@@ -6,6 +6,7 @@ export default createStore({
   state: {
     token: "",
     acesso: "",
+    nome: "",
     logado: false
   },
   mutations: { //commit
@@ -21,7 +22,12 @@ export default createStore({
       state.acesso = acesso
     },
 
-    //
+    //setando o nome
+    saveNome(state, nome) {
+      state.nome = nome
+    },
+
+    //logout
     logout(state) {
       router.push("/");
       state.logado = false;
