@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import Salas from './salas/Salas.vue';
+    
 import Alunos from './alunos/Alunos.vue';
 import Axios from "@/services/restApi/restServices"
 
@@ -107,7 +107,7 @@ import Axios from "@/services/restApi/restServices"
           },
         }
     },
-    components: { Salas, Alunos},
+    components: {Alunos},
         methods: {
             async logout() {
             this.$store.commit("logout")

@@ -81,72 +81,54 @@
 <script>
 
 import router from '@/router';
-import Axios from "@/services/restApi/restServices";
 import Cadastro from './cadastro-modal/Cadastro.vue';
-import Functions from "@/services/functions"
+import Functions from '@/services/functions/loginFunctions'
 
 export default {
     name: "LoginPage",
     data() {
         return {
-            userLogin: {
+            userLogin: { //dados do get dos campos do login
                 email: "",
                 senha: ""
             },
-            dadosBack: null,
-            encaminhamento: {
-                token: "",
-                acesso: "",
-                nome: ""
-            }
+            encaminhamento: "" //objeto que vai ser jogado no store - pt 2
         };
     },
+
     methods: {
         async tryLogin(e) {
             e.preventDefault();
             
-            
-           Functions.tryLogin1(this.userLogin); 
-            //metodo Post com os dados do userLogin
-           /* Axios.save(this.userLogin).then(resposta => {
-                this.dadosBack = resposta.data; //recebendo os valores que o post gerou
-                for (let elemento of this.dadosBack) {
-                    this.encaminhamento.acesso = elemento.acesso;
-                }
-                for (let elemento of this.dadosBack) {
-                    this.encaminhamento.token = elemento.token;
-                }
-                for (let elemento of this.dadosBack) {
-                    this.encaminhamento.nome = elemento.nome
-                }
-
-                //jogando os dados para o store
-                this.$store.commit("saveToken", this.encaminhamento.token);
-                this.$store.commit("saveAcesso", this.encaminhamento.acesso);
-                this.$store.commit("saveNome", this.encaminhamento.nome);
-                this.redirecionamento();
-            });*/
-        },
-        async redirecionamento() {
-            //router.push para redirecionar
-            switch (this.$store.state.acesso) {
-
-                case "A": router.push("/pai"); 
-                 break;
-                    case "P": router.push("/prof");
-                     break;
-                        case "": alert("Usuario ou Senha Incorreta")
-                          break;
-                default: 
-            }
-        }
-
-    },
-    mounted() {
-        //RESOLVER ERRO AO CARREGAR A PAGINA
-        this.redirecionamento();
+            //chamando o retono da função aqui (definindo token, acesso e nome no store) - pt 1
+            this.encaminhamento = await Functions.tryLogin(this.userLogin)
+           
+            //jogando os dados para o store - pt 3
+            this.$store.dispatch("setDados", this.encaminhamento)
         
+            //chamando o redirecionamento
+            this.redirecionamento();
+     
+        },
+
+        async redirecionamento() {
+
+            if(this.$store.state.logado) {
+                switch (this.$store.state.acesso) {
+                    case "A": router.push("/pai"); 
+                    break;
+                        case "P": router.push("/prof");
+                        break;
+                          default: alert("Senha incorreta")
+                          break;
+                    }       
+                }
+            }
+
     },
+
+    mounted() { this.redirecionamento() },
+
     components: { Cadastro }
 }
 
@@ -278,13 +260,6 @@ export default {
         color: #00a7aa;
     }
     
-    /*
-    aside p {
-        line-height: 1.3vw;
-        font-family: 'poppinslight';
-        font-size: .9vw;
-    }
-    */
     
     /* Formatação dos campos (inputs) */
     

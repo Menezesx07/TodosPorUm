@@ -4,6 +4,3 @@
   
 </template>
 
-<style>
-
-</style>

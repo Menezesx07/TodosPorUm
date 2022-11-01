@@ -9,31 +9,31 @@ export default createStore({
     nome: "",
     logado: false
   },
+
   mutations: { //commit
 
-    //setando o token e definindo o logado como true
-    saveToken(state, token) {
-      state.token = token
-      state.logado = true;
-    },
-
-    //setando o acesso
-    saveAcesso(state, acesso) { 
-      state.acesso = acesso
-    },
-
-    //setando o nome
-    saveNome(state, nome) {
-      state.nome = nome
-    },
-
-    //logout
+    //logout (não funciona se estiver no action)
     logout(state) {
       router.push("/");
       state.logado = false;
-      state.token = "";
-      state.acesso = "";
+      state.token = null;
+      state.acesso = null;
+      state.nome = null;
     }
+  },
+
+  actions: { //dispatch
+
+    //setando os dados do this.$store.state
+    setDados(context, dadosLogin) {
+
+        this.state.token = dadosLogin.token
+        this.state.nome = dadosLogin.nome
+        this.state.acesso = dadosLogin.acesso
+        this.state.logado = true
+        
+    }
+
   },
   plugins: [
     new VuexPersistence({
