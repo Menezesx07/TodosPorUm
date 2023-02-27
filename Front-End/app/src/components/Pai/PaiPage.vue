@@ -92,6 +92,8 @@
                             <td>{{retornoBd.turno}}</td>
                             <td>
                                 <div class="d-flex justify-content-around">
+                                    <button class="btn text-white fw-bold btn-info" @click="atividades">DICAS</button>
+
                                     <span class="material-icons" title="Deletar" @click="removeAlunoBd(retornoBd.id)">delete</span>
                                     <span class="material-icons" title="Editar">edit</span>
                                 </div>
@@ -110,7 +112,7 @@
 
 import Axios from "@/services/restApi/restServices"
 import CadastroPai from "./cadastro-modal/CadastroPai.vue";
-
+import router from '@/router';
 
     export default {
     name: "PaiPage",
@@ -131,6 +133,9 @@ import CadastroPai from "./cadastro-modal/CadastroPai.vue";
         },
         async logout() {
             this.$store.commit("logout");
+        },
+        atividades () {
+            router.push("/atividades");
         }
     },
     mounted() {
@@ -440,5 +445,7 @@ import CadastroPai from "./cadastro-modal/CadastroPai.vue";
             font-size: 3.2vw;
             margin: auto;
         }
+
+       
     }
 </style>

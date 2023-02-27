@@ -3,6 +3,7 @@ import LoginView from '../views/LoginView.vue'
 import PaiView from '../views/PaiView.vue'
 import ProfView from '../views/ProfView.vue'
 import SobreView from '../views/SobreView.vue'
+import Atividades from '../components/atividades/Atividades.vue'
 
 const routes = [
   {
@@ -24,7 +25,13 @@ const routes = [
     path: '/sobre',
     name: 'sobre',
     component: SobreView
+  },
+  {
+    path: '/atividades',
+    name: 'atividades',
+    component: Atividades
   }
+  
   
 ]
 
